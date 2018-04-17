@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd"> 
+      <context:annotation-config/>
+      
+<!--  <bean name="beans1" class="com.pkrm.spring.MyBean" > 
+<constructor-arg name="name1" value="anvesh" ></constructor-arg>
+ <constructor-arg name="number" value="10"></constructor-arg>
+ <constructor-arg name="day" ref=""></constructor-arg> 
+</bean> -->
+<!-- <bean name="today" class="com.pkrm.spring.Day"  >
+</bean>
+<bean name="mybean" class="com.pkrm.spring.MyBean">
+<property name="name" value="anvesh"></property>
+<property name="number" value="10"></property>
+</bean>
+<bean name="newbean" class="com.pkrm.spring.NewBean" lazy-init="true" scope="prototype"></bean>
+ -->
+ <!-- <bean id="abstractClass" class="com.pkrm.spring.AbstractClass" abstract="true">
+ <property name="name1" value="anvesh"></property>
+ </bean>
+ <bean id="myAbstract" class="com.pkrm.spring.MyAbstract" parent="abstractClass"></bean> -->
+  <bean id="abc" class="com.pkrm.spring.StaticFactoryBean" ></bean>
+<!--  <bean name="staticFactoryBean" factory-bean="abc" factory-method="createInstance" ></bean> -->
+   <bean id="instanceFactoryBean" class="com.pkrm.spring.InstanceFactoryBean" ></bean>
+    <!-- <bean name="myinstanceFactoryBean" factory-bean="instanceFactoryBean" factory-method="createInstance" scope="prototype"></bean> --> 
+  
+    <bean id="empAddress" class="com.pkrm.spring.Address"></bean>
+    <bean id="myEmployee" class="com.pkrm.spring.EmployeeUsingAutowired"></bean>
+ </beans>

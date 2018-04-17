@@ -1,0 +1,322 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-image: url("spotlight.jpg");
+                width:100%;
+                height: 100%;
+            }
+        form{
+            width:400px;
+            height:400px;
+        }
+            table {
+                border: 1px solid green;
+            }
+            #addtable{
+                border: 2px solid green; 
+                border-collapse: collapse;
+                background-color: rgb(180, 211, 221);
+                background-image:url("background.jpg");
+                padding-left:20px; 
+                display: none;
+                width:100%;
+                margin:20px;
+                margin-right: 100px;
+            }
+            #edittable{
+                border: 2px solid green; 
+                border-collapse: collapse;
+                background-color: lightblue;
+                background-image:url("background.jpg");
+                padding-left:20px; 
+                display: none;
+                width:100%;
+                margin:20px;
+                margin-left: 100px;
+            }
+            .main{
+                border:1px solid green;
+            }
+            td{
+                padding:10px;
+            }
+        
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    
+    <body >
+        <h1 align="center" style="float:center">Task List</h1>
+        <table border="green" id="myTable" align="center">
+               
+          
+        </table>
+    
+      
+        <tr>
+            <p margin="10px 10px">
+            <center>
+                <input style="background-color:aqua;border-radius:5px" type="button" value="Add" onclick="myAdd();">
+                <input style="background-color:aqua;border-radius:5px" type="button" value="Edit" onclick="myEdit();">
+                <input style="background-color:aqua;border-radius:5px" type="button" value="Remove" onclick="deleterow();">
+                <input style="background-color:aqua;border-radius:5px" type="button" value="Display as JSON String" onclick="jsonString();">
+            </center>
+            </p>
+        </tr>
+      
+                    <form style="float:left">  
+                        <table id="addtable"  >
+                             <tr>   <th><h1 align="center">ADD TASK</h1> </th></tr>
+                            <tr>
+                                <td class="add" ><label for="mtitle"><b>Title</b></label></td>
+                                <td><input type="text" id="mtitle"></td>
+                            </tr>
+                            <tr>
+                                <td class="add"><label for="mdescription"><b>Description</b></label></td>
+                                <td><textarea rows="2" id="mdescription"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="add"><label for="massignee"><b>Assignee</b></label></td>
+                                <td><input type="text" id="massignee"></td>
+                            </tr>
+                            <tr>
+                                <td class="add"><label for="ehours"><b>Estimated Hours</b></label></td>
+                                <td><input type="number" id="ehours"></td>
+                            </tr>
+                            <tr>
+                                <td class="add"><label for="startdate"><b>Start Date</b></label></td>
+                                <td><input type="Date" id="startdate"></td>
+                            </tr>
+                            <tr>
+                                <td class="add"><label for="enddate"><b>End Date</b></label></td>
+                                <td><input type="Date" id="enddate"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" onclick="add();" value="ok"></td>
+                               
+                            </tr>
+                        </table>
+                    </form>
+                    <form style="float:left">
+                        <table id="edittable" >
+                          <tr><th><h1>EDIT TASK </h1></th></tr> 
+                            <tr>
+                                <td class="edit"><label for="mtitle"><b>Title</b></label></td>
+                                <td><input type="text" id="etitle"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><label for="mdescription"><b>Description</b></label></td>
+                                <td><textarea rows="2" type="text"  id="edescription"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><label for="massignee"><b>Assignee</b></label></td>
+                                <td><input type="text" id="eassignee"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><label for="ehours"><b>Estimated Hours</b></label></td>
+                                <td><input type="number" id="eshours"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><label for="startdate"><b>Start Date</b></label></td>
+                                <td><input type="Date" id="estartdate"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><label for="enddate"><b>End Date</b></label></td>
+                                <td><input type="Date" id="eenddate"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit"><input type="button" onclick="editInsert();" value="ok"></td>
+                                
+                            </tr>
+                        </table>
+                    </form>
+        <script>
+             var glbtasklist=[];
+             //  localStorage.setItem("glbtasklist",JSON.stringify(glbtasklist));
+            // localStorage.getItem("glbtasklist");
+        
+            $(function(){
+                $("#myTable").append("<tr><th> Title</th><th>Description </th><th>Assignee </th><th> Estimated Hours </th><th>Start Date  </th><th> End Date  </th><th> Select </th></tr>");
+            if(localStorage.getItem("global")==null){
+                var taskArray='[{ "Title":"My First Task", "Description":"My First Task", "Assignee":"John", "EstimatedHours":10, "StartDate":"12-01-2017","EndDate":"12-31-2017"},{ "Title":"My Second Task", "Description":"My Second Task", "Assignee":"John2", "EstimatedHours":"10", "StartDate":"12-01-2017","EndDate":"12-31-2017"},{ "Title":"My Third Task", "Description":"My Third Task", "Assignee":"John3", "EstimatedHours":"10", "StartDate":"12-01-2017","EndDate":"12-31-2017" }]';
+               localStorage.setItem("global",taskArray);
+            }
+                var obj=JSON.parse(localStorage.getItem("global"));
+                for(var i=0;i<obj.length;i++){
+                    glbtasklist.push(obj[i]);
+  $("#myTable").append("<tr><td>" + obj[i].Title + "</td><td>" +obj[i].Description + "</td><td>" + obj[i].Assignee + "</td><td>" + obj[i].EstimatedHours + "</td><td>" + obj[i].StartDate + "</td><td>" + obj[i].EndDate + "</td><td><input type='radio' name='task'></td></tr>");
+
+}
+            });
+
+            function add() {
+                
+                $("#myTable").append("<tr><td>" +  $("#mtitle").val() + "</td><td>" + $("#mdescription").val() + "</td><td>" + $("#massignee").val() + "</td><td>" + $("#ehours").val() + "</td><td>" + $("#startdate").val() + "</td><td>" + $("#enddate").val() + "</td><td><input type='radio' name='task'></td></tr>");
+   
+             
+                 var task = {Title:$("#mtitle").val(),Description:$("#mdescription").val(),Assignee:$("#massignee").val(),EstimatedHours:$("#ehours").val(),StartDate:$("#startdate").val(),EndDate:$("#enddate").val()};
+                 var taskstr = JSON.stringify(task);
+                 glbtasklist.push(task);
+                 localStorage.setItem("global",JSON.stringify(glbtasklist));
+                addClear();
+                $("#addtable").hide();
+            }
+
+            
+          function addClear(){
+            $("#mtitle").val("");
+            $("#mdescription").val("");
+            $("#massignee").val("");
+            $("#ehours").val("");
+            $("#startdate").val("");
+            $("#enddate").val("");
+            $("#addtable").hide();
+         } 
+
+         
+         function myAdd() {
+             var x = document.getElementById("addtable");
+             if (x.style.display === "none") {
+                 x.style.display = "block";
+                 } else {
+                 x.style.display = "none";
+                 }
+                }
+          
+
+            
+          function displayedit(){
+            if($("#addtable").hide()){
+            if(!(getSelectedRow()==null)){
+            $("#edittable").toggle();
+
+            disabledRadioButton();
+             retrieved();
+         }}
+       }
+
+     function undisplayedit(){
+        var a= $("#edittable");
+        if(a.style.display=="block"){
+          a.style.display= "none";
+        }
+    
+     }
+    
+  
+   function editInsert(){
+              var selectedRow=getSelectedRow();
+              var coloumns=selectedRow.row.childNodes;
+              coloumns[0].firstChild.nodeValue=$("#etitle").val();
+              coloumns[1].firstChild.nodeValue=$("#edescription").val();
+              coloumns[2].firstChild.nodeValue=$("#eassignee").val();
+              coloumns[3].firstChild.nodeValue=$("#eshours").val();
+              coloumns[4].firstChild.nodeValue=$("#estartdate").val();
+              coloumns[5].firstChild.nodeValue=$("#eenddate").val();
+              editjson();
+              editClear();
+              $("#edittable").hide();
+          }
+
+          function editClear(){
+            $("#etitle").val("");
+            $("#edescription").val("");
+            $("#eassignee").val("");
+            $("#eshours").val("");
+            $("#estartdate").val("");
+            $("#eenddate").val("");
+          
+                      } 
+           
+      function getSelectedRow(){
+         var allRows = $("[name='task']");
+         var selectedRadioButton= null;
+              for(var i=0;i<allRows.length;i++){
+                 if(allRows[i].checked){
+                 selectedRadioButton=allRows[i];
+                 break;
+               }
+             }
+
+         var selectedRow=null;
+            if(selectedRadioButton!=null){
+            selectedRow={row : selectedRadioButton.parentElement.parentElement, index:i};
+    }
+       else if(selectedRadioButton=='noRadioChecked'){
+        alert('no radio button checked');
+    }
+       return selectedRow;
+    }
+
+          function editjson(){
+             var selectedrow=getSelectedRow();
+              
+             var editText={ Title:$("#etitle").val(),Description :$("#edescription").val(), Assignee:$("#eassignee").val(),EstimatedHours: $("#eshours").val(),StartDate: $("#estartdate").val(),EndDate:$("#eenddate").val()};
+
+              glbtasklist.splice(selectedrow.index,1,editText);
+              localStorage.setItem("global",JSON.stringify(glbtasklist));
+              addClear();
+        }
+
+    
+            function myEdit() {
+             var y = document.getElementById("edittable");
+                if (y.style.display === "none") {
+                 y.style.display = "block";
+                  } else {
+                 y.style.display = "none";
+                    }
+                    editRow();
+                  
+                }
+
+
+      
+          
+            function editRow(){
+             var selectedRow=getSelectedRow();
+            var coloumns=selectedRow.row.childNodes;
+          
+            $("#etitle").val(coloumns[0].firstChild.nodeValue);
+            $("#edescription").val(coloumns[1].firstChild.nodeValue);
+            $("#eassignee").val(coloumns[2].firstChild.nodeValue);
+            $("#eshours").val(coloumns[3].firstChild.nodeValue);
+            $("#estartdate").val(coloumns[4].firstChild.nodeValue);
+            $("#eenddate").val(coloumns[5].firstChild.nodeValue);
+                    
+    
+            }
+
+            
+            function deleterow(){
+                   var selectedrow=getSelectedRow();
+                   glbtasklist.splice(selectedrow.index,1);
+                   $("#myTable").find('input[name="task"]').each(function(){
+                   if($(this).is(":checked")){
+                   $(this).parents("tr").remove(); } });
+                   localStorage.setItem("global",JSON.stringify(glbtasklist));
+
+        }
+            
+            function jsonString(){
+                
+                var jString=document.getElementById("myTable");
+                var jArray=[];
+                for (var i=0;i<jString.rows.length;i++){
+                    var arrayObject={
+                        Title:jString.rows[i].cells[0].innerHTML,
+                        Description:jString.rows[i].cells[1].innerHTML,
+                        Assignee:jString.rows[i].cells[2].innerHTML,
+                        EstimatedHours:jString.rows[i].cells[3].innerHTML,
+                        StartDate:jString.rows[i].cells[4].innerHTML,
+                        EndDate:jString.rows[i].cells[5].innerHTML
+                    }
+                    jArray.push(arrayObject);
+                }
+                alert(JSON.stringify(glbtasklist));
+            }
+           
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<import resource="context.xml" />
+
+	<!-- JMS Producer Configuration -->
+
+
+
+	<bean class="org.springframework.jms.connection.SingleConnectionFactory"
+		id="jmsConsumerConnectionFactory">
+
+		<constructor-arg ref="connectionFactory" />
+
+	</bean>
+
+	<bean
+		class="com.pkrm.clientservice.DefaultMessageConverter"
+		id="messageConverter" />
+
+
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		id="listener">
+
+		<property ref="jmsConsumerConnectionFactory" name="connectionFactory" />
+
+		<property ref="sampleQueue" name="destination" />
+
+		<property ref="messageListener" name="messageListener" />
+
+	</bean>
+
+	<bean class="com.pkrm.clientservice.ServiceProvider"
+		id="serviceProvider" />
+
+
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+		id="messageListener">
+
+		<property ref="serviceProvider" name="delegate" />
+
+		<property name="defaultListenerMethod" value="process" />
+
+		<property ref="messageConverter" name="messageConverter" />
+
+	</bean>
+
+</beans>

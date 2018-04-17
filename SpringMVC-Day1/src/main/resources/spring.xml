@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+                           http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+
+<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
+<property name="url" value="jdbc:oracle:thin:@172.16.200.222:1521:traindb"/>
+
+<property name="username" value="akulakarni"/>
+ 
+<property name="password" value="prokarma"/>
+
+</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean class="com.pkrm.springmvc.dao.DaoImpl" name="daoImpl"></bean>
+	
+	<context:component-scan base-package="com.pkrm.springmvc"/>
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     						 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd    
+                           http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+                        
+<bean name="employee" class="com.pkrm.springmvc.model.Employee"></bean>
+<bean name="daoImpl" class="com.pkrm.springmvc.dao.DaoImpl"></bean>
+<bean name="defaultUsers" class="com.pkrm.springmvc.controller.DefaultEmployeesController"></bean>
+<bean name="welcomeController" class="com.pkrm.springmvc.controller.WelcomeController" />
+<bean name="addEmployeeController" class="com.pkrm.springmvc.controller.AddEmployeeController" />
+<bean name="viewEmployeesController" class="com.pkrm.springmvc.controller.ViewEmployeesController" />
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	
+		<property name="mappings">
+			<props>
+			    <prop key="">welcomeController</prop>
+				<prop key="welcome">welcomeController</prop>
+			    <prop key="welc*">welcomeController</prop>
+				<prop key="addEmployee">addEmployeeController</prop>
+				<prop key="viewEmployees">viewEmployeesController</prop>
+				<prop key="users">defaultUsers</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
+<property name="url" value="jdbc:oracle:thin:@172.16.200.222:1521:traindb"/>
+
+<property name="username" value="akulakarni"/>
+ 
+<property name="password" value="prokarma"/>
+
+</bean>
+
+
+<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+<property ref="dataSource" name="dataSource"/>
+</bean>
+
+
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+ <context:component-scan base-package="com.pkrm.springmvc"></context:component-scan>
+</beans>

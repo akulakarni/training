@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+
+<head>
+  <meta charset="utf-8" />
+
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="week14.js"></script>
+</head>
+
+<body ng-controller="MainController">
+<div align="center">
+		 User Id: <input type="text" ng-model="searchId" />
+	</div>
+	<div align="center">
+		User Name: <input type="text" ng-model="searchUser" />
+	</div>
+  <table border="1px">
+    <thead>
+      <tr>
+        <th>UserId</th>
+        <th>UserName</th>
+        <th>Roles</th>
+        <th>Select</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="users in userDetail|filter: { userId : searchId,userName : searchUser}">
+        <td>{{users.userId}}</td>
+        <td>{{users.userName}}</td>
+        <td>{{users.role}}</td>
+        <td>
+          <input type="radio" value="{{$index}}" ng-change="getRadioButtonIndex(radioButtonValue)" ng-model="$parent.radioButtonValue" id="radio" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <input type="button" value="Add User" ng-click="Add()">
+  <input type="button" value="Edit User" ng-click="Edit()">
+  <input type="button" value="Delete User" ng-click="delete()">
+
+  <form id="addUser" ng-submit="addUser();addToDb()" style="float:left" ng-show="AddTable">
+    <table>
+      <tr>
+        <th>
+          <h1 align="center">User Details</h1></th>
+      </tr>
+      <tr>
+        <td>
+          <label>UserId:</label>
+        </td>
+        <td>
+          <input type="number" id="userid" ng-model="userDetails.userId" required>
+          <br>
+        </td>
+        <tr>
+          <td>
+            <label>UserName:</label>
+          </td>
+          <td>
+            <input type="text" id="userName" ng-model="userDetails.userName" required>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>FirstName:</label>
+          </td>
+          <td>
+            <input type="text" id="firstName" ng-model="userDetails.firstName" required>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>LastName:</label>
+          </td>
+          <td>
+            <input type="text" id="lastName" ng-model="userDetails.lastName" required>
+            <br>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label>Roles:</label>
+          </td>
+          <td>
+            <select id="role" ng-model="userDetails.role" required>
+              <option value="Developer">Developer</option>
+              <option value="Manager">Manager</option>
+              <option value="Lead">Lead</option>
+              <option value="ProductManager">ProductManager</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="ok">
+          </td>
+        </tr>
+    </table>
+  </form>
+
+
+  <form style="float:left" id="editUser" ng-show="EditTable" ng-submit="editUser()">
+    <table>
+      <tr>
+        <th>
+          <legend>
+            <h1 align="center">Edit User</h1></legend>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <label>UserId:</label>
+        </td>
+        <td>
+          <input type="number" id="userId" ng-model="userDetails.userId" required>
+          <br>
+        </td>
+        <tr>
+          <td>
+            <label>UserName:</label>
+          </td>
+          <td>
+            <input type="text" id="username" ng-model="userDetails.userName" required>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>FirstName:</label>
+          </td>
+          <td>
+            <input type="text" id="firstname" ng-model="userDetails.firstName" required>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>LastName:</label>
+          </td>
+          <td>
+            <input type="text" id="lastname" ng-model="userDetails.lastName" required>
+            <br>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label>Roles:</label>
+          </td>
+          <td>
+            <select id="Role" ng-model="userDetails.role" required>
+              <option value="Developer">Developer</option>
+              <option value="Manager">Manager</option>
+              <option value="Lead">Lead</option>
+              <option value="ProductManager">ProductManager</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="ok">
+          </td>
+        </tr>
+    </table>
+  </form>
+
+</body>
+
+</html>

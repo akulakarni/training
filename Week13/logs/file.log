@@ -1,0 +1,4 @@
+2018-02-19 19:12:20 INFO  Logger:26 - Sent message '{"person":{"userId":4224,"userName":"skalyan","firstName":"sankineni","lastName":"kalyan"},"roles":["Manager","Developer","Lead","Product Manager"]}'
+2018-02-19 20:17:12 INFO  Logger:26 - Sent message '{"person":{"userId":4225,"userName":"smohan","firstName":"sai","lastName":"mohan"},"roles":["Manager","Developer","Lead","Product Manager"]}'
+2018-02-19 20:18:24 INFO  Logger:26 - Sent message '{"person":{"userId":4225,"userName":"smohan","firstName":"sai","lastName":"mohan"},"roles":["Manager","Developer","Lead","Product Manager"]}'
+2018-02-20 16:59:40 INFO  Logger:26 - Sent message '{"person":{"userId":4225,"userName":"smohan","firstName":"sai","lastName":"mohan"},"roles":["Manager","Developer","Lead","Product Manager"]}'

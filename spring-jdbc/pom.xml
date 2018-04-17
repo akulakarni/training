@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>spring-jdbc</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>spring</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<java.version>1.7</java.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
+		<cglib.version>2.2.2</cglib.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<javax-servlet.version>3.0.1</javax-servlet.version>
+        <jetty-plugin.version>7.5.0.RC2</jetty-plugin.version>
+        <jetty.version>6.1.10</jetty.version>
+        <mysql.version>5.0.5</mysql.version>
+        <h2database.version>1.4.192</h2database.version>
+        <jackson-version>2.4.5</jackson-version>
+        <junit.version>4.5</junit.version>
+        <mockito.version>1.8.5</mockito.version>
+        <guava.version>15.0</guava.version>
+        
+	</properties>
+
+	<dependencies>
+	     <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+                <scope>compile</scope>
+          </dependency>
+	<!--h2db  -->
+	<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+	<dependency>
+	    <groupId>com.h2database</groupId>
+	    <artifactId>h2</artifactId>
+	    <version>${h2database.version}</version>
+	</dependency>
+
+ <!-- Test Dependencies -->
+         <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>${mysql.version}</version>
+			</dependency>
+	
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            
+       <!--	JSON Processor -->
+		   <dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-annotations</artifactId>
+			    <version>${jackson-version}</version>
+			</dependency>
+
+		<!-- CGLib for @Configuration -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>${commons-dbcp.version}</version>
+		</dependency>
+		<!-- Servlet Spec -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		 <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax-servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+		  <!-- Jetty Stuff -->
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-management</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>springsource-milestones</id>
+			<name>SpringSource Milestones Proxy</name>
+			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+		</repository>
+	</repositories>
+
+  <profiles>
+        <profile>
+            <id>jetty</id>
+            <activation>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty-plugin.version}</version>
+                        <configuration>
+                            <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
+                            <webAppConfig>
+                                <contextPath>/spring_jdbc</contextPath>
+                            </webAppConfig>
+                            <connectors>
+                                <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                                    <port>7256</port>
+                                    <maxIdleTime>60000</maxIdleTime>
+                                </connector>
+                            </connectors>
+                            <!-- scanIntervalSeconds>1</scanIntervalSeconds -->
+                            <reload>manual</reload>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jboss-local</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <version>2.1</version>
+                        <configuration>
+                            <url>${local-ews-manager-uri}</url>
+                            <update>true</update>
+                            <path>/${war-file-name}</path>
+                            <warFile>target/${war-file-name}.war</warFile>
+                            <username>${local-ews-manager-user}</username>
+                            <password>${local-ews-manager-password}</password>
+                            <mode>war</mode>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jboss-ews</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <version>2.1</version>
+                        <configuration>
+                            <url>${jboss-dev-url-1}</url>
+                            <update>true</update>
+                            <path>/${war-file-name}</path>
+                            <warFile>target/${war-file-name}.war</warFile>
+                            <username>system</username>
+                            <password>tmc4up</password>
+                            <mode>war</mode>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jboss-ews2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <version>2.1</version>
+                        <configuration>
+                            <url>${jboss-dev-url-2}</url>
+                            <update>true</update>
+                            <path>/${war-file-name}</path>
+                            <warFile>target/${war-file-name}.war</warFile>
+                            <username>system</username>
+                            <password>tmc4up</password>
+                            <mode>war</mode>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+
+	<build>
+		<finalName>spring</finalName>
+		<plugins>
+		
+		 <!-- Compiler -->
+		<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+         </plugin>
+		</plugins>
+	</build>
+</project>

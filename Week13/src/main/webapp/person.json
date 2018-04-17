@@ -1,0 +1,7 @@
+[
+{"UserId" : 1428,"UserName" : "svinod ","FirstName" : "shivannagari","LastName" : "vinod","Role" : "Manager"},
+{"UserId" : 2435,"UserName" : "mrohit","FirstName" : "Rohit","LastName" : "Sagar","Role" : "ProjectLead"},
+{"UserId" : 3678,"UserName" : "praju","FirstName" : "Penthala","LastName" : "Raju","Role" : "Assistant Manager"},
+{"UserId" : 4123,"UserName" : "spranav","FirstName" : "Pranav","LastName" : "Reddy","Role" : "Developer"},
+{"UserId" : 5000,"UserName" : "mkarthik","FirstName" : "Munaganti","LastName" : "Karthik","Role" : "Architect"}
+]
